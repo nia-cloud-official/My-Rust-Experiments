@@ -1,6 +1,3 @@
-### ✅ `README.md`
-
-```markdown
 # 🦀 My Rust Experiments
 
 Welcome to my personal Rust playground!
