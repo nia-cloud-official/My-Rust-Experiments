@@ -25,30 +25,6 @@ This repo contains small apps, components, and experiments built with Rust (most
 
 ---
 
-## 💻 How to Run (Yew)
-
-To try out a component:
-
-1. Clone this repo:
-   ```bash
-   git clone https://github.com/nia-cloud-official/My-Rust-Experiments.git
-   cd My-Rust-Experiments
-   ```
-
-2. Install dependencies:
-   ```bash
-   cargo install trunk
-   ```
-
-3. Run the app:
-   ```bash
-   trunk serve
-   ```
-
-Then open `http://localhost:8080` in your browser.
-
----
-
 ## 🧠 Still Learning...
 
 This project is all about **learning in public** — it might be messy now, but progress is progress!
@@ -60,8 +36,3 @@ Feel free to fork, clone, or open issues if you want to chat Rust.
 ## ✨ Author
 
 **Milton Vafana** — [@nia-cloud-official](https://github.com/nia-cloud-official)
-
----
-
-> “Learning never exhausts the mind.” — Leonardo da Vinci
-```
