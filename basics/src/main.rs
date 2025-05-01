@@ -1,15 +1,18 @@
+#[derive(Debug)]
 enum Form {
     FirstYear(Subjects),
     SecondYear(Subjects),
     ThirdYear(Subjects),
 }
 
+#[derive(Debug)]
 enum Subjects {
     Maths(Modules, Modules),
     English(Modules, Modules),
     Geo(Modules),
 }
 
+#[derive(Debug)]
 enum Modules {
     Introduction(String),
     Theory(String),
@@ -92,12 +95,32 @@ fn add_form(form: i32, subject: Subjects) -> Form {
         }
     }
 }
+/* 
+fn main() {
+    let name: String = String::from("Milton");
+    let form: i32 = 1;
+    let subject: Subjects = Subjects::Maths((),());
+    let user_module: Modules = Modules::Theory({});
+    let first_student = Student::create_student(name, form, subject);
+    Student::print_student_info(&first_student);
+} */
+
+// Corrected main function
 
 fn main() {
     let name: String = String::from("Milton");
     let form: i32 = 1;
-    let subject: Subjects = Subjects::Maths({}, {});
-    let user_module: Modules = Modules::Theory({});
-    let first_student = Student::create_student(name, form, subject, user_module);
-    Student::print_student_info(&first_student);
+
+    // Correctly initialize Subjects with valid Modules
+    let subject: Subjects = Subjects::Maths(
+        Modules::Introduction(String::from("Basic Algebra")),
+        Modules::Theory(String::from("Advanced Calculus")),
+    );
+
+    // Correctly initialize a single Module (if needed)
+    let user_module: Modules = Modules::Theory(String::from("Some Theory"));
+
+    // Create a student and print their info
+    let first_student = Student::create_student(name, form, subject);
+    first_student.print_student_info();
 }
