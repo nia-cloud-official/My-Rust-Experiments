@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>main.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="code-review--fixes">Code Review &amp; Fixes</h1>
+<h2 id="overview">Overview</h2>
+<p>A code review and correction of a Rust-based user/course management system. Focuses on enums, structs, and method implementations.</p>
+<hr>
+<h2 id="%F0%9F%9A%A7-original-intent">🚧 Original Intent</h2>
+<h3 id="what-you-were-trying-to-do">What You Were Trying to Do</h3>
+<p><strong>1. Define Roles</strong><br>
+Created <code>Role</code> enum with variants:</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Role</span></span> { Client, Admin, Guest }
+</div></code></pre>
+<p><strong>2. Define Courses</strong><br>
+Created <code>Course</code> enum with variants holding data:</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Course</span></span> {
+    Rust(<span class="hljs-built_in">Option</span>&lt;<span class="hljs-built_in">Vec</span>&lt;<span class="hljs-built_in">String</span>&gt;&gt;),
+    Html(<span class="hljs-built_in">Vec</span>&lt;<span class="hljs-built_in">String</span>&gt;),
+    Java(<span class="hljs-built_in">Vec</span>&lt;<span class="hljs-built_in">String</span>&gt;),
+}
+</div></code></pre>
+<p><strong>3. Define Users</strong><br>
+Created <code>User</code> struct:</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">User</span></span> {
+    name: <span class="hljs-built_in">String</span>,
+    role: Role,
+    class: Course,
+}
+</div></code></pre>
+<p><strong>4. Define Modules</strong><br>
+Created <code>Modules</code> enum for course-specific modules:</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Modules</span></span> {
+    Rust(<span class="hljs-built_in">String</span>),
+    Html(<span class="hljs-built_in">String</span>),
+    Java(<span class="hljs-built_in">String</span>),
+}
+</div></code></pre>
+<p><strong>5. Implement User Methods</strong></p>
+<ul>
+<li><code>add_course</code>: Add course + modules to user</li>
+<li><code>create</code>: User constructor</li>
+<li><code>get_name</code>, <code>get_role</code>, <code>get_user</code>: Info retrieval methods</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%94%A5-where-things-went-wrong">🔥 Where Things Went Wrong</h2>
+<h3 id="syntax-errors">Syntax Errors</h3>
+<ul>
+<li>
+<p><strong>Course Enum</strong><br>
+❌ Invalid: <code>Option&lt;Vec&lt;String&gt;, None&gt;</code><br>
+✅ Fixed: <code>Option&lt;Vec&lt;String&gt;&gt;</code></p>
+</li>
+<li>
+<p><strong>Match Arms</strong><br>
+❌ Incomplete: <code>Modules::Rust(&quot;Rust for beginners&quot;) =&gt; ,</code><br>
+✅ Fixed: Proper pattern matching</p>
+</li>
+<li>
+<p><strong>Field Mismatch</strong><br>
+❌ Referenced <code>self.course</code> but field is <code>class</code></p>
+</li>
+</ul>
+<h3 id="logical-errors">Logical Errors</h3>
+<ul>
+<li>
+<p><strong>Return Type Mismatch</strong><br>
+❌ <code>add_course</code> returned <code>Vec&lt;String&gt;</code> instead of <code>Course&lt;String&gt;</code></p>
+</li>
+<li>
+<p><strong>Type Name Mismatch</strong><br>
+❌ <code>Courses</code> vs <code>Course</code> in struct definition</p>
+</li>
+</ul>
+<h3 id="incomplete-implementation">Incomplete Implementation</h3>
+<ul>
+<li><strong>Unfinished <code>add_course</code></strong></li>
+<li><strong>Empty <code>main</code> function</strong></li>
+</ul>
+<hr>
+<h2 id="%F0%9F%9B%A0-corrected-code">🛠 Corrected Code</h2>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Role</span></span> {
+    Client,
+    Admin,
+    Guest,
+}
+
+<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Course</span></span> {
+    Rust(<span class="hljs-built_in">Option</span>&lt;<span class="hljs-built_in">Vec</span>&lt;<span class="hljs-built_in">String</span>&gt;&gt;),
+    Html(<span class="hljs-built_in">Vec</span>&lt;<span class="hljs-built_in">String</span>&gt;),
+    Java(<span class="hljs-built_in">Vec</span>&lt;<span class="hljs-built_in">String</span>&gt;),
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">User</span></span> {
+    name: <span class="hljs-built_in">String</span>,
+    role: Role,
+    class: Course,
+}
+
+<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Modules</span></span> {
+    Rust(<span class="hljs-built_in">String</span>),
+    Html(<span class="hljs-built_in">String</span>),
+    Java(<span class="hljs-built_in">String</span>),
+}
+
+<span class="hljs-keyword">impl</span> User {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">add_course</span></span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, course: Course, module: Modules) {
+        <span class="hljs-keyword">match</span> &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>.class {
+            Course::Rust(<span class="hljs-literal">Some</span>(modules)) =&gt; {
+                <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> Modules::Rust(module_name) = module {
+                    modules.push(module_name);
+                }
+            }
+            Course::Html(modules) =&gt; {
+                <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> Modules::Html(module_name) = module {
+                    modules.push(module_name);
+                }
+            }
+            Course::Java(modules) =&gt; {
+                <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> Modules::Java(module_name) = module {
+                    modules.push(module_name);
+                }
+            }
+            _ =&gt; {
+                <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Invalid course or module."</span>);
+            }
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">create</span></span>(name: <span class="hljs-built_in">String</span>, role: Role, class: Course) -&gt; <span class="hljs-keyword">Self</span> {
+        <span class="hljs-keyword">Self</span> { name, role, class }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">get_name</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; &amp;<span class="hljs-built_in">String</span> {
+        &amp;<span class="hljs-keyword">self</span>.name
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">get_role</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; <span class="hljs-built_in">String</span> {
+        <span class="hljs-keyword">match</span> <span class="hljs-keyword">self</span>.role {
+            Role::Client =&gt; <span class="hljs-built_in">String</span>::from(<span class="hljs-string">"Client"</span>),
+            Role::Admin =&gt; <span class="hljs-built_in">String</span>::from(<span class="hljs-string">"Admin"</span>),
+            Role::Guest =&gt; <span class="hljs-built_in">String</span>::from(<span class="hljs-string">"Guest"</span>),
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">get_user</span></span>(&amp;<span class="hljs-keyword">self</span>) {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Name: {}"</span>, <span class="hljs-keyword">self</span>.get_name());
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}, is a {} user"</span>, <span class="hljs-keyword">self</span>.get_name(), <span class="hljs-keyword">self</span>.get_role());
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> user = User::create(
+        <span class="hljs-built_in">String</span>::from(<span class="hljs-string">"Alice"</span>),
+        Role::Client,
+        Course::Rust(<span class="hljs-literal">Some</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-built_in">String</span>::from(<span class="hljs-string">"Introduction to Rust"</span>)])),
+    );
+
+    user.get_user();
+
+    user.add_course(
+        Course::Rust(<span class="hljs-literal">Some</span>(<span class="hljs-built_in">vec!</span>[])),
+        Modules::Rust(<span class="hljs-built_in">String</span>::from(<span class="hljs-string">"Rust for Beginners"</span>)),
+    );
+
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> Course::Rust(<span class="hljs-literal">Some</span>(modules)) = &amp;user.class {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Rust Modules: {:?}"</span>, modules);
+    }
+}
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%93%9D-explanation-of-changes">📝 Explanation of Changes</h2>
+<h3 id="1-fixed-course-enum">1. Fixed Course Enum</h3>
+<pre class="hljs"><code><div><span class="hljs-deletion">- Fruits(Option&lt;Vec&lt;String&gt;, None&gt;)</span>
+<span class="hljs-addition">+ Fruits(Option&lt;Vec&lt;String&gt;&gt;)</span>
+</div></code></pre>
+<h3 id="2-field-name-correction">2. Field Name Correction</h3>
+<pre class="hljs"><code><div><span class="hljs-deletion">- struct User { class: Courses }</span>
+<span class="hljs-addition">+ struct User { class: Course }</span>
+</div></code></pre>
+<h3 id="3-addcourse-implementation">3. add_course Implementation</h3>
+<ul>
+<li>Added proper module handling with type-safe matching:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">match</span> &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>.class {
+    Course::Rust(<span class="hljs-literal">Some</span>(modules)) =&gt; {
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> Modules::Rust(module_name) = module {
+            modules.push(module_name);
+        }
+    }
+    <span class="hljs-comment">// ... other variants</span>
+}
+</div></code></pre>
+<h3 id="4-demo-main-function">4. Demo main() Function</h3>
+<ul>
+<li>Added concrete usage example:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> user = User::create(<span class="hljs-comment">/* ... */</span>);
+user.add_course(<span class="hljs-comment">/* ... */</span>);
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%93%9A-documentation">📚 Documentation</h2>
+<h3 id="enums-overview">Enums Overview</h3>
+<table>
+<thead>
+<tr>
+<th>Enum</th>
+<th>Variants</th>
+<th>Data Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Role</code></td>
+<td>Client, Admin, Guest</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>Course</code></td>
+<td>Rust, Html, Java</td>
+<td><code>Option&lt;Vec&lt;String&gt;&gt;</code></td>
+</tr>
+<tr>
+<td><code>Modules</code></td>
+<td>Rust, Html, Java</td>
+<td><code>String</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="user-struct-methods">User Struct Methods</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add_course</code></td>
+<td>Adds module to matching course type</td>
+</tr>
+<tr>
+<td><code>create</code></td>
+<td>Constructor for new users</td>
+</tr>
+<tr>
+<td><code>get_user</code></td>
+<td>Prints formatted user info</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%F0%9F%94%9C-next-steps">🔜 Next Steps</h2>
+<ol>
+<li>Add error handling for module/course mismatches</li>
+<li>Implement multiple courses per user</li>
+<li>Add unit tests</li>
+<li>Extend with course removal functionality</li>
+</ol>
+
+</body>
+</html>
